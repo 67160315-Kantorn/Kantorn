@@ -457,7 +457,7 @@ if user_input:
             with st.chat_message("assistant"):
 
                 if image_path:
-                    st.image(image_path, use_column_width=True)
+                    st.image(image_path, width=500)
 
                 st.markdown(f"""
 🪨 **ลายหรือสีหินแกรนิตที่แนะนำ:** {stone_name}
@@ -504,6 +504,7 @@ if user_input:
             st.session_state.messages.append(
                 {"role": "assistant", "content": "fallback recommendations"}
             )
+
 
 
 
