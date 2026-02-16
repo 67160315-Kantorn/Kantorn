@@ -1,0 +1,31 @@
+stone_name,origin,color_tone,base_color_en,pattern_type,pattern_intensity,visual_mood,price_min,price_max,hardness_mohs,water_absorption,maintenance_level,popular_use,indoor_outdoor,style_tag,surface_finish,thickness_mm,stock_status
+Black Galaxy,India,ดำ,black,speckled,medium,luxury,2500,3500,6.0,0.18,low,countertop|floor,indoor,minimal|modern,polished,20,in_stock
+River White,India,ขาว,white,veined,medium,classic,1800,2800,6.5,0.16,low,countertop|wall,indoor,minimal|classic,polished,18,in_stock
+Absolute Black,India,ดำสนิท,black,solid,low,minimal,2800,3900,7.0,0.14,low,countertop|floor,indoor|outdoor,modern|luxury,polished,20,in_stock
+Steel Grey,India,เทาเข้ม,gray,solid,low,modern,2200,3000,6.5,0.17,medium,floor|wall,indoor,modern|minimal,honed,18,in_stock
+Kashmir White,India,ขาวครีม,white,veined,medium,luxury,3200,4500,6.0,0.19,medium,countertop|feature_wall,indoor|outdoor,luxury|minimal,polished,20,pre_order
+Verde Ubatuba,Brazil,เขียวเข้ม,green,speckled,medium,luxury,3500,5000,7.0,0.12,low,countertop|floor,indoor|outdoor,luxury,polished,20,in_stock
+Blue Bahia,Brazil,น้ำเงินคราม,blue,dramatic,high,luxury,4500,7000,6.8,0.13,medium,feature_wall|floor,indoor|outdoor,luxury,polished,20,pre_order
+Bianco Romano,Italy,ขาวเบจ,beige,veined,medium,classic,3000,4800,6.3,0.15,medium,floor|wall,indoor|outdoor,classic|luxury,honed,18,in_stock
+Crema Julia,Spain,ครีมอ่อน,cream,veined,medium,classic,2800,4200,6.2,0.18,medium,floor|feature_wall,indoor|outdoor,classic,polished,18,low_stock
+Impala Black,South Africa,ดำเทา,black,solid,low,modern,2600,3900,6.5,0.17,low,floor|wall,indoor,modern,flamed,18,in_stock
+Blue Pearl,Norway,น้ำเงินเงิน,blue,speckled,medium,luxury,3800,5500,6.4,0.16,low,feature_wall|floor,indoor,luxury|modern,polished,20,pre_order
+Black Zimbabwe,Zimbabwe,ดำสนิท,black,solid,low,luxury,3000,5500,7.2,0.11,low,countertop|floor,indoor|outdoor,luxury,polished,20,in_stock
+Rosa Beta,Italy,ชมพูอ่อน,pink,veined,medium,classic,2600,4100,6.1,0.19,medium,wall|interior,indoor,classic,polished,18,low_stock
+Rosa Porrino,Spain,ชมพูแดง,pink,veined,medium,classic,2400,3700,6.2,0.18,medium,wall|floor,indoor|outdoor,classic,polished,18,in_stock
+G654 Sesame Gray,China,เทาดำ,gray,speckled,medium,modern,1800,2600,6.8,0.2,low,floor|outdoor,outdoor,modern|minimal,flamed,18,in_stock
+G603 Light Gray,China,เทาอ่อน,gray,solid,low,minimal,1600,2300,6.4,0.22,medium,floor|wall,indoor,minimal|classic,flamed,18,in_stock
+China White Crystal,China,ขาวใส,white,speckled,medium,classic,2000,3000,6.3,0.19,medium,wall|feature_wall,indoor,classic,polished,18,low_stock
+China Multicolor Red,China,แดงลาย,red,dramatic,high,bold,2200,3200,6.5,0.21,medium,feature_wall|floor,indoor|outdoor,modern,polished,18,in_stock
+Black Vietnam Absolute,Vietnam,ดำสนิท,black,solid,low,minimal,1900,2800,6.7,0.2,low,countertop|floor,indoor,minimal,polished,18,in_stock
+White Vietnam Crystal,Vietnam,ขาวใส,white,speckled,medium,minimal,1700,2500,6.3,0.23,medium,floor|wall,indoor,minimal,polished,18,in_stock
+Gray Vietnam Pearl,Vietnam,เทาไข่มุก,gray,speckled,medium,minimal,1800,2600,6.5,0.21,medium,floor|interior,indoor,minimal,polished,18,in_stock
+White Dallas,Brazil,ขาวเทา,white,veined,medium,classic,2100,3000,6.4,0.17,medium,floor|wall,indoor|outdoor,minimal|classic,polished,18,low_stock
+Golden Crystal,Brazil,ทองครีม,gold,speckled,medium,modern,2400,3500,6.6,0.15,medium,countertop|feature_wall,indoor,modern,polished,20,in_stock
+Grey Thai Cloud,Thailand,เทา,gray,solid,low,minimal,1500,2300,6.0,0.24,medium,floor|wall,indoor,minimal,honed,18,in_stock
+White Thai Pearl,Thailand,ขาวนวล,white,speckled,medium,classic,1400,2100,6.1,0.23,medium,floor|wall|countertop,indoor,minimal|classic,polished,18,in_stock
+Black Thai Galaxy,Thailand,ดำทอง,black,speckled,medium,luxury,1600,2400,6.3,0.22,low,countertop|floor,indoor,minimal|modern,polished,18,low_stock
+Red Thai Ruby,Thailand,แดงเข้มอ่อน,red,dramatic,high,bold,1700,2500,6.0,0.25,medium,wall|interior,indoor|outdoor,classic,polished,15,in_stock
+Emerald Pearl,India,เขียวมุก,green,speckled,medium,luxury,3000,4500,6.3,0.16,low,feature_wall|floor,indoor|outdoor,luxury,polished,20,pre_order
+Verde Marina,Italy,เขียวเข้ม,green,veined,medium,luxury,2800,4200,6.4,0.18,medium,feature_wall|outdoor,indoor,luxury,polished,20,low_stock
+
