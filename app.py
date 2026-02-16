@@ -281,6 +281,37 @@ def validate_ai_output(ai_json, filtered_df):
 
 
 
+st.markdown("""
+<style>
+.main {
+    background-color: #0f172a;
+}
+.block-container {
+    padding-top: 2rem;
+}
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+.subtitle {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.card {
+    background-color: #1e293b;
+    padding: 1.2rem;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("<h1>🪨 Granite AI Advisor</h1>", unsafe_allow_html=True)
+st.markdown(
+    "<div class='subtitle'>ระบบแนะนำลายหินแกรนิตแบบมืออาชีพ เลือกตามงบ สไตล์ และการใช้งาน</div>",
+    unsafe_allow_html=True
+)
 
 
 # ==========================================================
@@ -425,6 +456,7 @@ if user_input:
     st.session_state.messages.append(
         {"role": "assistant", "content": response_text}
     )
+
 
 
 
