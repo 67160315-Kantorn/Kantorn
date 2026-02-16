@@ -30,16 +30,6 @@ df = load_data()
 # ==========================================================
 # UTIL
 # ==========================================================
-def get_stone_image(stone_name):
-    safe_name = stone_name.replace(" ", "_")
-
-    for ext in ["jpg", "png"]:
-        image_path = f"images/{safe_name}.{ext}"
-        if os.path.exists(image_path):
-            return image_path
-
-    return None
-
 # ==========================================================
 # SESSION STATE INIT (ต้องมี)
 # ==========================================================
@@ -357,10 +347,6 @@ if default_prompt:
 
 
 
-# ==========================================================
-# MAIN CHAT LOOP
-# ==========================================================
-
 if user_input:
 
     # 1️⃣ Save user message
@@ -401,15 +387,12 @@ if user_input:
             )
         ]
 
-    # 5️⃣ Remove pre-order again
+    # 5️⃣ Remove pre-order again (safety)
     filtered_df = filtered_df[
         filtered_df["stock_status"] != "pre_order"
     ]
 
-    # ==========================================================
-    # RESPONSE LOGIC
-    # ==========================================================
-
+    # 6️⃣ Fallback if empty
     if filtered_df.empty:
 
         cheapest_df = df.sort_values("price_min")
@@ -417,13 +400,7 @@ if user_input:
         if not cheapest_df.empty:
             best_row = cheapest_df.iloc[0]
 
-            with st.chat_message("assistant"):
-
-                image_path = get_stone_image(best_row["stone_name"])
-                if image_path:
-                    st.image(image_path, use_column_width=True)
-
-                st.markdown(f"""
+            response_text = f"""
 ❌ ไม่พบหินที่ตรงเงื่อนไขในงบประมาณ {budget}
 
 🪨 ตัวเลือกที่ใกล้เคียงที่สุด:
@@ -431,36 +408,33 @@ if user_input:
 
 💰 ราคา:
 {best_row['price_min']} - {best_row['price_max']} บาท/ตร.ม.
-""")
 
-                st.session_state.messages.append(
-                    {"role": "assistant", "content": best_row["stone_name"]}
-                )
-
+💡 แนะนำเพิ่มงบอีกประมาณ
+{max(0, best_row['price_min'] - (budget or 0))} บาท
+"""
         else:
-            with st.chat_message("assistant"):
-                st.markdown("ไม่พบข้อมูลในระบบ")
+            response_text = "ไม่พบข้อมูลในระบบ"
 
     else:
 
+        # 7️⃣ Ranking
         ranked_df = ranking_score(filtered_df, budget, user_input)
+
+        # 8️⃣ AI
+        # ==========================================================
+# AI
+# ==========================================================
+
+
 
         ai_result = ask_ai_advisor(client, user_input, ranked_df)
         ai_result = validate_ai_output(ai_result, ranked_df)
 
-        # ✅ กรณี AI สำเร็จ
+        # 9️⃣ Build Response
         if ai_result:
 
-            stone_name = ai_result["recommended_stone"]
-            image_path = get_stone_image(stone_name)
-
-            with st.chat_message("assistant"):
-
-                if image_path:
-                    st.image(image_path, width=500)
-
-                st.markdown(f"""
-🪨 **ลายหรือสีหินแกรนิตที่แนะนำ:** {stone_name}
+            response_text = f"""
+🪨 **ลายหรือสีหินแกรนิตที่แนะนำ:** {ai_result['recommended_stone']}
 
 ✨ **ผิวที่เหมาะสม:** {ai_result['finish_type']}
 
@@ -471,39 +445,45 @@ if user_input:
 {ai_result['warnings']}
 
 💰 **ราคาประมาณ:** {ai_result['price_range']}
-""")
+"""
 
-            st.session_state.messages.append(
-                {"role": "assistant", "content": stone_name}
-            )
-
-        # ✅ กรณี AI พัง → fallback top3
         else:
 
             top3 = ranked_df.head(3)
+            recommendations = []
 
-            with st.chat_message("assistant"):
+            for _, row in top3.iterrows():
 
-                st.markdown("## 🎨 ลายแกรนิตที่เหมาะกับคุณ")
+                confidence = min(95, round(row["score"] * 100, 1))
 
-                for _, row in top3.iterrows():
+                style_raw = str(row.get("style_tag", "ไม่ระบุ"))
+                style_clean = ", ".join(
+                    [s.capitalize() for s in style_raw.split("|")]
+                )
 
-                    image_path = get_stone_image(row["stone_name"])
-                    if image_path:
-                        st.image(image_path, use_column_width=True)
+                recommendations.append(f"""
+### 🎨 {row.get('stone_name')}
 
-                    confidence = min(95, round(row["score"] * 100, 1))
+🖤 โทนสี: {row.get('color_tone')}  
+🌍 สีหลัก: {str(row.get('base_color_en')).capitalize()}  
+🌀 ลักษณะลาย: {row.get('pattern_type').capitalize()}  
+✨ สไตล์: {style_clean}  
 
-                    st.markdown(f"""
-### 🪨 {row['stone_name']}
-
-💰 ราคา: {row['price_min']} - {row['price_max']} บาท/ตร.ม.  
+💰 ราคา: {row.get('price_min')} - {row.get('price_max')} บาท/ตร.ม.
 ⭐ ความเหมาะสม: {confidence}%
 """)
 
-            st.session_state.messages.append(
-                {"role": "assistant", "content": "fallback recommendations"}
-            )
+            response_text = "## 🎨 ลายแกรนิตที่เหมาะกับคุณ\n"
+            response_text += "\n".join(recommendations)
+
+    # 🔟 Render (จุดเดียวเท่านั้น)
+    with st.chat_message("assistant"):
+        st.markdown(response_text)
+
+    st.session_state.messages.append(
+        {"role": "assistant", "content": response_text}
+    )
+
 
 
 
