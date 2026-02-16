@@ -208,17 +208,24 @@ def ask_ai_advisor(client, user_input, filtered_df):
     top_df = filtered_df.head(5)
 
     prompt = f"""
-คุณคือผู้เชี่ยวชาญด้านหินแกรนิต
+คุณคือผู้เชี่ยวชาญด้านหินแกรนิตในประเทศไทย
+
+⚠️ สำคัญมาก:
+- ตอบเป็นภาษาไทยเท่านั้น
+- ห้ามใช้ภาษาอังกฤษ
+- ห้ามอธิบายเกิน JSON
+- ห้ามแนะนำหินที่ไม่มีในรายการ
+
 เลือก stone_name ได้เฉพาะจากรายการที่ให้
 ตอบเป็น JSON เท่านั้น
 
 รายการ:
 {top_df[["stone_name","price_min","price_max","style_tag"]].to_json(orient="records", force_ascii=False)}
 
-คำถาม:
+คำถามจากลูกค้า (ภาษาไทย):
 {user_input}
 
-ตอบ:
+ตอบ JSON รูปแบบนี้:
 {{
     "recommended_stone": "",
     "finish_type": "",
@@ -226,6 +233,7 @@ def ask_ai_advisor(client, user_input, filtered_df):
     "warnings": ""
 }}
 """
+
 
     try:
         model = client.GenerativeModel(MODEL_NAME)
@@ -417,6 +425,7 @@ if user_input:
     st.session_state.messages.append(
         {"role": "assistant", "content": response_text}
     )
+
 
 
 
