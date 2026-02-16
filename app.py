@@ -345,7 +345,7 @@ if default_prompt:
 # MAIN CHAT LOOP
 # ==========================================================
 
-user_input = st.chat_input("พิมพ์ความต้องการของคุณ...")
+
 
 if user_input:
 
@@ -483,6 +483,7 @@ if user_input:
     st.session_state.messages.append(
         {"role": "assistant", "content": response_text}
     )
+
 
 
 
