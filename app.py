@@ -312,7 +312,34 @@ st.markdown(
     "<div class='subtitle'>ระบบแนะนำลายหินแกรนิตแบบมืออาชีพ เลือกตามงบ สไตล์ และการใช้งาน</div>",
     unsafe_allow_html=True
 )
+col1, col2, col3 = st.columns(3)
 
+with col1:
+    if st.button("งบ 2500 ปูพื้นมินิมอล"):
+        st.session_state.example_prompt = "งบ 2500 ปูพื้นในบ้าน สไตล์มินิมอล"
+
+with col2:
+    if st.button("ครัวสีดำเรียบ งบ 1800"):
+        st.session_state.example_prompt = "งบ 1800 ทำครัว สีดำเรียบ"
+
+with col3:
+    if st.button("เทา modern สำหรับผนัง"):
+        st.session_state.example_prompt = "เทา modern ใช้กับผนัง"
+
+st.divider()
+
+# 5️⃣ แสดง chat history
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# 6️⃣ chat input ต้องอยู่ล่างสุดเสมอ
+default_prompt = st.session_state.get("example_prompt", "")
+user_input = st.chat_input("พิมพ์ความต้องการของคุณ...")
+
+if default_prompt:
+    user_input = default_prompt
+    st.session_state.example_prompt = None
 
 # ==========================================================
 # MAIN CHAT LOOP
@@ -456,6 +483,7 @@ if user_input:
     st.session_state.messages.append(
         {"role": "assistant", "content": response_text}
     )
+
 
 
 
